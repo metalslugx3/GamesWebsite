@@ -1,0 +1,64 @@
+{
+	"test_level":
+	{
+		"name":"test_level",
+		"spawn_pos":[206,88],
+		"boss_item_spawn_pos":[201.5,78],
+		"door_tile":6,
+		"spike_tile":12
+	},
+	
+    "cut_man":
+	{
+		"name":"cut_man",
+		"spawn_pos":[206,88],
+		"boss_item_spawn_pos":[201.5,78],
+		"door_tile":6,
+		"spike_tile":12
+	},
+	
+	"guts_man":
+	{
+		"name":"guts_man",
+		"spawn_pos":[237,72],
+		"boss_item_spawn_pos":[233.5,60],
+		"door_tile":102,
+		"spike_tile":68
+	},
+	
+	"ice_man":
+	{
+		"name":"ice_man",
+		"spawn_pos":[317,73],
+		"boss_item_spawn_pos":[313,64.5],
+		"door_tile":134,
+		"spike_tile":12
+	},
+		
+	"bomb_man":
+	{
+		"name":"bomb_man",
+		"spawn_pos":[269,78],
+		"boss_item_spawn_pos":[264.5,68],
+		"door_tile":80,
+		"spike_tile":12
+	},
+		
+	"fire_man":
+	{
+		"name":"fire_man",
+		"spawn_pos":[236,71],
+		"boss_item_spawn_pos":[201.5,78],
+		"door_tile":0,
+		"spike_tile":12
+	},
+		
+	"elec_man":
+	{
+		"name":"elec_man",
+		"spawn_pos":[236,71],
+		"boss_item_spawn_pos":[201.5,78],
+		"door_tile":0,
+		"spike_tile":12
+	}
+}

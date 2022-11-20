@@ -1,0 +1,175 @@
+{
+    "stage_select":
+    {
+		"test_level":
+        {
+            "stageID":-1,
+            "selected":false,
+            "stage_sprite":"cut_man_portrait",
+			"stage_sprite_completed":"cut_man_portrait_black",
+            "stage_name":"TEST",
+            "portrait_position":[12,12],
+            "portrait_frame_position":[6,6],
+            "scaleX":1
+        },
+		
+        "cut_man":
+        {
+            "stageID":0,
+            "selected":true,
+            "stage_sprite":"cut_man_portrait",
+			"stage_sprite_completed":"cut_man_portrait_black",
+            "stage_name":"CUTMAN",
+            "portrait_position":[80,25],
+            "portrait_frame_position":[74,19],
+            "scaleX":1
+        },
+
+        "guts_man":
+        {
+            "stageID":1,
+            "selected":false,
+            "stage_sprite":"guts_man_portrait",
+			"stage_sprite_completed":"guts_man_portrait_black",
+            "stage_name":"GUTSMAN",
+            "portrait_position":[144,25],
+            "portrait_frame_position":[138,19],
+            "scaleX":1
+        },
+
+        "ice_man":
+        {
+            "stageID":2,
+            "selected":false,
+            "stage_sprite":"ice_man_portrait",
+			"stage_sprite_completed":"ice_man_portrait_black",
+            "stage_name":"ICEMAN",
+            "portrait_position":[176,93],
+            "portrait_frame_position":[170,87],
+            "scaleX":1
+        },
+
+        "bomb_man":
+        {
+            "stageID":3,
+            "selected":false,
+            "stage_sprite":"bomb_man_portrait",
+			"stage_sprite_completed":"bomb_man_portrait_black",
+            "stage_name":"BOMBMAN",
+            "portrait_position":[144,161],
+            "portrait_frame_position":[138,155],
+            "scaleX":1
+        },
+
+        "fire_man":
+        {
+            "stageID":4,
+            "selected":false,
+            "stage_sprite":"fire_man_portrait",
+			"stage_sprite_completed":"fire_man_portrait_black",
+            "stage_name":"FIREMAN",
+            "portrait_position":[80,161],
+            "portrait_frame_position":[74,155],
+            "scaleX":1
+        },
+
+        "elec_man":
+        {
+            "stageID":5,
+            "selected":false,
+            "stage_sprite":"elec_man_portrait",
+			"stage_sprite_completed":"elec_man_portrait_black",
+            "stage_name":"ELECMAN",
+            "portrait_position":[48,93],
+            "portrait_frame_position":[42,87],
+            "scaleX":1
+        }
+    },
+
+    "boss_animation":
+    {
+        "cut_man":
+        {
+            "stageID":0,
+            "sprite_sheet":"cut_man",
+            "position":[96,35],
+            "scaleX":-1,
+            "initial_frame":"taunt_with_cutter_01",
+            "jump":["jump_with_cutter"],
+            "taunt":["taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01","taunt_with_cutter_02","taunt_with_cutter_01"],
+            "tauntFrameSpeed":7,
+            "loop_count":8,
+            "path":[[96,35],[96,5],[96,110]]
+        },
+
+        "guts_man":
+        {
+            "stageID":1,
+            "sprite_sheet":"guts_man",
+            "position":[160,35],
+            "scaleX":1,
+            "initial_frame":"stand",
+            "jump":["crouch", "jump"],
+            "taunt":["stand", "taunt","stand", "taunt","stand", "taunt","stand", "taunt","stand", "taunt","stand"],
+            "tauntFrameSpeed":7,
+            "loop_count":4,
+            "path":[[160,35],[130,15],[96,110]]
+        },
+
+        "ice_man":
+        {
+            "stageID":2,
+            "sprite_sheet":"ice_man",
+            "position":[192,103],
+            "scaleX":1,
+            "initial_frame":"stand",
+            "jump":["jump"],
+            "taunt":["taunt_01","stand","taunt_01","taunt_02"],
+            "tauntFrameSpeed":3,
+            "loop_count":1,
+            "path":[[192,103],[130,40],[96,110]]
+        },
+
+        "bomb_man":
+        {
+            "stageID":3,
+            "sprite_sheet":"bomb_man",
+            "position":[160,171],
+            "scaleX":1,
+            "initial_frame":"lift_up",
+            "jump":["jump_diagonal_lift"],
+            "taunt":["lift_down","lift_up"],
+            "tauntFrameSpeed":2,
+            "loop_count":1,
+            "path":[[160,171],[125,75],[96,110]]
+        },
+
+        "fire_man":
+        {
+            "stageID":4,
+            "sprite_sheet":"fire_man",
+            "position":[96,171],
+            "scaleX":-1,
+            "initial_frame":"stand_fire_01",
+            "jump":["jump_fire"],
+            "taunt":["taunt_fire_01","stand_fire_01","taunt_fire_01","taunt_fire_02","taunt_fire_03","taunt_fire_02","taunt_fire_03","taunt_fire_02","taunt_fire_03","taunt_fire_02","taunt_fire_03"],
+            "tauntFrameSpeed":5,
+            "loop_count":1,
+            "path":[[96,171],[96,75],[96,110]]
+        },
+
+        "elec_man":
+        {
+            "stageID":5,
+            "sprite_sheet":"elec_man",
+            "position":[48,93],
+            "scaleX":-1,
+            "initial_frame":"stand",
+            "jump":["jump"],
+            "taunt":["taunt_02","stand","taunt_01","taunt_02"],
+            "tauntFrameSpeed":5,
+            "loop_count":1,
+            "path":[[64,103],[76,40],[96,110]]
+        }
+    }
+}

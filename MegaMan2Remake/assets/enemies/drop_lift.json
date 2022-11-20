@@ -1,0 +1,36 @@
+{"frames": {
+
+"drop_lift_01":
+{
+	"frame": {"x":5,"y":5,"w":32,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":28},
+	"sourceSize": {"w":32,"h":28}
+},
+"drop_lift_02":
+{
+	"frame": {"x":5,"y":36,"w":32,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":28},
+	"sourceSize": {"w":32,"h":28}
+},
+"drop_lift_03":
+{
+	"frame": {"x":5,"y":67,"w":32,"h":28},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":28},
+	"sourceSize": {"w":32,"h":28}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "drop_lift.png",
+	"format": "RGBA8888",
+	"size": {"w":42,"h":100},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d234d14d9b0f2bebdadc61b0d832b13d:2455d8360fea64408cc60874ef7d1073:0e891f22024252d662ccc37e8c102fe6$"
+}
+}

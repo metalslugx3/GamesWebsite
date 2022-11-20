@@ -1,0 +1,29 @@
+{
+    "debug":
+    {
+		"world":
+		{
+			"allow_draw_hitboxes":false,
+			
+			"allow_draw_outlines":false,
+			
+			"allow_draw_grid":false,
+			
+			"spikesVisible":false,
+			
+			"backgroundVisible":true,
+			
+			"foregroundVisible":true,
+			
+			"startLevelImmediately":false,
+			
+			"startingLevel":"cut_man",
+			
+			"enableMusic":true,
+			
+			"isPlayerInvincible":false,
+			
+			"show_debug_test_level_in_stage_select":false
+		}
+	}
+}

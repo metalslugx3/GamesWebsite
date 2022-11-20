@@ -1,0 +1,28 @@
+{"frames": {
+
+"flea_01":
+{
+	"frame": {"x":5,"y":5,"w":14,"h":19},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":19},
+	"sourceSize": {"w":14,"h":19}
+},
+"flea_02":
+{
+	"frame": {"x":22,"y":5,"w":14,"h":19},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":14,"h":19},
+	"sourceSize": {"w":14,"h":19}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "flea.png",
+	"format": "RGBA8888",
+	"size": {"w":41,"h":29},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:7a59a9f17c9b26bc86892a4c3a845278:e5e99aa9d41ca34824a946f257d4a133:1b15265027ded0e8b1be7725745f1a75$"
+}
+}

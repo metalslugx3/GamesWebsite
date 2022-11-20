@@ -1,0 +1,36 @@
+{"frames": {
+
+"octopus_battery_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"octopus_battery_02":
+{
+	"frame": {"x":24,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"octopus_battery_03":
+{
+	"frame": {"x":43,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "octopus_battery_orange.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:972307c1360ee78c38d7d0102abdcf35:4ab21ecf9c5ecd83302fc7b307b57f55:750f21966f43c9321edde2d2b1db7077$"
+}
+}

@@ -1,0 +1,28 @@
+{"frames": {
+
+"peng_01":
+{
+	"frame": {"x":5,"y":5,"w":24,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":16},
+	"sourceSize": {"w":24,"h":16}
+},
+"peng_02":
+{
+	"frame": {"x":32,"y":5,"w":24,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":16},
+	"sourceSize": {"w":24,"h":16}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "peng.png",
+	"format": "RGBA8888",
+	"size": {"w":61,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ff7f935523aa6821c8335d380ab7637e:842c302fd3ba7003837534aad85d20ae:8ddb5929721221d76b0e3582ac03e61e$"
+}
+}

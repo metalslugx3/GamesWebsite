@@ -1,0 +1,62 @@
+html, body { height:100%; overflow:hidden; background-color:#191B25;}
+body { margin:0; }
+h1 { color:#F6F5F0; text-align: center;}
+h2 { color:#F6F5F0; text-align: center;}
+ol, ul, li
+{
+	list-style-position:initial;
+	list-style-type: none;
+	margin:0px;
+	padding: 2px;
+	color: #F6F5F0;
+	font-size: 1.13em;
+}
+
+textarea{
+	background-color: #13151c;
+	color: #F6F5F0;
+	font-size: 1.2em;
+	margin-bottom: 355px;
+	width:100%;
+}
+
+table {
+	text-align: center;
+	margin:auto;
+	table-layout: fixed;
+}
+
+#debugOverlay
+{
+	position: absolute;
+	width: 340px; 
+   	height: 600px;
+	left: 20px;
+	background-color: #13151c;
+}
+
+#helpOverlay
+{
+	position: fixed;
+	width: 340px;
+	height: 600px;
+	right: 50px;
+	top: 80px;
+	background-color: #13151c;
+}
+
+#canvas 
+{
+	text-align: center;
+	position: relative;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 315px;
+}
+
+#tableTitle{
+	background-color: #000000;
+	margin: auto;
+	color: #F6F5F0;
+	font-size: 1.13em;
+}

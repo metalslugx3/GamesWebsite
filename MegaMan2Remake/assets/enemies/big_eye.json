@@ -1,0 +1,28 @@
+{"frames": {
+
+"big_eye_01":
+{
+	"frame": {"x":5,"y":5,"w":32,"h":40},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":40},
+	"sourceSize": {"w":32,"h":40}
+},
+"big_eye_02":
+{
+	"frame": {"x":5,"y":48,"w":32,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":48},
+	"sourceSize": {"w":32,"h":48}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "big_eye.png",
+	"format": "RGBA8888",
+	"size": {"w":42,"h":101},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:d67b514651645cf4d52ced58c43717e3:7bedc02464a2bcfa7df5623fdeeb5943:d3fa521498fc7d3ff3c72cebccf55599$"
+}
+}

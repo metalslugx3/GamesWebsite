@@ -1,0 +1,28 @@
+{"frames": {
+
+"super_cutter_01":
+{
+	"frame": {"x":5,"y":5,"w":19,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":20},
+	"sourceSize": {"w":19,"h":20}
+},
+"super_cutter_02":
+{
+	"frame": {"x":27,"y":5,"w":19,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":19,"h":20},
+	"sourceSize": {"w":19,"h":20}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "super_cutter.png",
+	"format": "RGBA8888",
+	"size": {"w":51,"h":30},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:6f90ba41ffc2ffe5025746346a37d343:c14235d644fb28842d9146984eed7765:cadb0472f6b8ab752d2cedba209ff6b4$"
+}
+}

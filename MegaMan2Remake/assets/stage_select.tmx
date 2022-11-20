@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="2017.05.26" orientation="orthogonal" renderorder="right-down" width="16" height="15" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="stage_select_tiles" tilewidth="45" tileheight="45" tilecount="9" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="32" height="32" source="stage_select/bomb_man_portraint.png"/>
+  </tile>
+  <tile id="1">
+   <image width="45" height="45" source="stage_select/cursor_blink.png"/>
+  </tile>
+  <tile id="2">
+   <image width="45" height="45" source="stage_select/cursor_normal.png"/>
+  </tile>
+  <tile id="3">
+   <image width="32" height="32" source="stage_select/cut_man_portrait.png"/>
+  </tile>
+  <tile id="4">
+   <image width="32" height="32" source="stage_select/elec_man_portrait.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="stage_select/fire_man_portraint.png"/>
+  </tile>
+  <tile id="6">
+   <image width="32" height="32" source="stage_select/guts_man_portraint.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="32" source="stage_select/ice_man_portrait.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="stage_select/wily_portrait.png"/>
+  </tile>
+ </tileset>
+ <layer name="Tile Layer 1" width="16" height="15">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,4,0,0,0,7,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,5,0,0,0,0,0,0,0,8,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,6,0,0,0,1,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+</map>

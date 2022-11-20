@@ -1,0 +1,44 @@
+{"frames": {
+
+"foot_holder_01":
+{
+	"frame": {"x":2,"y":2,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
+"foot_holder_02":
+{
+	"frame": {"x":28,"y":2,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
+"foot_holder_03":
+{
+	"frame": {"x":2,"y":28,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+},
+"foot_holder_04":
+{
+	"frame": {"x":28,"y":28,"w":24,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":24,"h":24},
+	"sourceSize": {"w":24,"h":24}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "foot_holder.png",
+	"format": "RGBA8888",
+	"size": {"w":54,"h":54},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:faaa22fb3cba29cd1f8aaa19f9fadaee:d68d74fadab03551fb2ef80192020801:077a68975b18681a65fcca8cfdf921ba$"
+}
+}

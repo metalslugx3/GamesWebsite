@@ -1,0 +1,28 @@
+{"frames": {
+
+"flying_shell_01":
+{
+	"frame": {"x":5,"y":5,"w":17,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":21},
+	"sourceSize": {"w":17,"h":21}
+},
+"flying_shell_02":
+{
+	"frame": {"x":25,"y":5,"w":17,"h":21},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":21},
+	"sourceSize": {"w":17,"h":21}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "flying_shell.png",
+	"format": "RGBA8888",
+	"size": {"w":47,"h":31},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:696e586968b9c43d39158d3546612f26:2846ea60034810bf14b956d1c13da30b:994275390d1fc3df9904013d95b7b382$"
+}
+}

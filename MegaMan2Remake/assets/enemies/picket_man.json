@@ -1,0 +1,68 @@
+{"frames": {
+
+"picket_man_01":
+{
+	"frame": {"x":5,"y":5,"w":34,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":24},
+	"sourceSize": {"w":34,"h":24}
+},
+"picket_man_02":
+{
+	"frame": {"x":42,"y":5,"w":34,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":24},
+	"sourceSize": {"w":34,"h":24}
+},
+"picket_man_03":
+{
+	"frame": {"x":79,"y":5,"w":34,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":34,"h":24},
+	"sourceSize": {"w":34,"h":24}
+},
+"picket_man_weapon_01":
+{
+	"frame": {"x":5,"y":32,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+"picket_man_weapon_02":
+{
+	"frame": {"x":20,"y":32,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+"picket_man_weapon_03":
+{
+	"frame": {"x":35,"y":32,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+},
+"picket_man_weapon_04":
+{
+	"frame": {"x":50,"y":32,"w":12,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":12,"h":12},
+	"sourceSize": {"w":12,"h":12}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "picket_man.png",
+	"format": "RGBA8888",
+	"size": {"w":118,"h":49},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5cdedd2725c582ce1b09a34812d32dae:d30f023f2b76c3550ef6ffe56396a621:fd6e6eb66a15b8a4c8f9912605b72971$"
+}
+}

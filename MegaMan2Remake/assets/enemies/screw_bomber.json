@@ -1,0 +1,44 @@
+{"frames": {
+
+"screw_bomber_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"screw_bomber_02":
+{
+	"frame": {"x":24,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"screw_bomber_03":
+{
+	"frame": {"x":43,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"screw_bomber_04":
+{
+	"frame": {"x":62,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "screw_bomber.png",
+	"format": "RGBA8888",
+	"size": {"w":83,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:38fcb04df56289fc7947e022f379f6d9:ce77275027677cbd653ddf4013c0eb68:cbd501ebe54c2404564f06340265f45d$"
+}
+}

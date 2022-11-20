@@ -1,0 +1,28 @@
+{"frames": {
+
+"spine_orange_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":8},
+	"sourceSize": {"w":16,"h":8}
+},
+"spine_orange_02":
+{
+	"frame": {"x":5,"y":16,"w":16,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":8},
+	"sourceSize": {"w":16,"h":8}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "spine_orange.png",
+	"format": "RGBA8888",
+	"size": {"w":26,"h":29},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:16efd1d2f5d855048fc88fb2fd03aa3b:44d47432f74d02e64e4da8a3d41833be:4f3869b8c4ce9f83a131e2f1b4e69056$"
+}
+}

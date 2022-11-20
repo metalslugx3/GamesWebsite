@@ -1,0 +1,52 @@
+{"frames": {
+
+"sniper_joe_bullet":
+{
+	"frame": {"x":5,"y":5,"w":6,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":6},
+	"sourceSize": {"w":6,"h":6}
+},
+"sniper_joe_idle":
+{
+	"frame": {"x":14,"y":5,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"sniper_joe_jump":
+{
+	"frame": {"x":49,"y":5,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"sniper_joe_pre_shoot_01":
+{
+	"frame": {"x":84,"y":5,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"sniper_joe_pre_shoot_02":
+{
+	"frame": {"x":119,"y":5,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "sniper_joe.png",
+	"format": "RGBA8888",
+	"size": {"w":156,"h":42},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3e160e0c2af5c404dbffa0ca0bafbe06:517400b486d09ddc062ac3058caffe44:8b22c07278ffb838a92540a6f0d047ee$"
+}
+}

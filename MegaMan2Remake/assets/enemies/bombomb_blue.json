@@ -1,0 +1,28 @@
+{"frames": {
+
+"bombomb_blue":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":12},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":12},
+	"sourceSize": {"w":16,"h":12}
+},
+"bombomb_blue_shrapnel":
+{
+	"frame": {"x":5,"y":20,"w":8,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":6},
+	"sourceSize": {"w":8,"h":6}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "bombomb_blue.png",
+	"format": "RGBA8888",
+	"size": {"w":26,"h":31},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e8ea991cce2f71c9019021fe070ed8cb:40fedeaec76379dba99001a901065454:e2a657c4295c309c8bea5a4fe560cbb6$"
+}
+}

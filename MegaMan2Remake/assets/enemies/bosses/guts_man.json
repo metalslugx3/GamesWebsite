@@ -1,0 +1,84 @@
+{"frames": {
+
+"big_rock":
+{
+	"frame": {"x":5,"y":5,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"crouch":
+{
+	"frame": {"x":44,"y":5,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"crouch_lift":
+{
+	"frame": {"x":83,"y":5,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"jump":
+{
+	"frame": {"x":5,"y":42,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"lift":
+{
+	"frame": {"x":44,"y":42,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"small_rock":
+{
+	"frame": {"x":83,"y":42,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"stand":
+{
+	"frame": {"x":5,"y":79,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"taunt":
+{
+	"frame": {"x":44,"y":79,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+},
+"throw":
+{
+	"frame": {"x":83,"y":79,"w":36,"h":34},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":34},
+	"sourceSize": {"w":36,"h":34}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "guts_man.png",
+	"format": "RGBA8888",
+	"size": {"w":124,"h":118},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cff3491822b63f7f68e927a8415603e9:2324b9c6e151fb0036d07b32e5c5ab80:2f441d81a32a0878af8816ae7ce09149$"
+}
+}

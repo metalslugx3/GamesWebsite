@@ -1,0 +1,44 @@
+{"frames": {
+
+"beak_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"beak_02":
+{
+	"frame": {"x":24,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"beak_03":
+{
+	"frame": {"x":43,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"beak_04":
+{
+	"frame": {"x":62,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "beak.png",
+	"format": "RGBA8888",
+	"size": {"w":83,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:4c5278151fe40d7fe49c1e87ed352bfa:08962cfc0242fe3fdf16d9a3c68cf9d0:99b38e11d8d332a03d8356ca00b2946c$"
+}
+}

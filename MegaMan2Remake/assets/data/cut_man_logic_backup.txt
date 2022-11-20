@@ -1,0 +1,897 @@
+import { World, Surface } from '../world'
+import { EntityType, TagType, AudioName, Konstants, WallContact } from '../konstants'
+import { Player } from '../player'
+import { Entity } from '../entity'
+import { Helper } from '../helper'
+import { MathUtil, KeyedCollection } from '../util/mathutil'
+import { Bullet } from '../bullets/bullet'
+import { State } from '../fsm/state'
+import { StateMachine } from '../fsm/stateMachine'
+import { PowerUp } from '../powerups/powerup'
+import { Meter } from '../ui/meter'
+import { CutManBullet } from '../bullets/cutManBullet'
+import { BoomerangBulletMovement } from '../bullets/boomerangBulletMovement'
+import { SAT2D } from '../sat2d/sat2d'
+import { Ray, RayType } from '../sat2d/ray'
+import { RayIntersection } from '../sat2d/rayIntersection'
+import { Vector2 } from '../sat2d/vector2'
+
+export enum CutManAnimations {
+    idle = 'idle',
+    throw_cutter = 'throw_cutter',
+    taunt_with_cutter = 'taunt_with_cutter',
+    taunt_without_cutter = 'taunt_without_cutter',
+    taunt_long = 'taunt_long',
+    run_with_cutter = 'run_with_cutter',
+    run_without_cutter = 'run_without_cutter',
+    hurt_with_cutter = 'hurt_with_cutter',
+    hurt_without_cutter = 'hurt_without_cutter',
+    jump_with_cutter = 'jump_with_cutter',
+    jump_without_cutter = 'jump_without_cutter',
+}
+
+export class CutMan extends Entity {
+
+    public player: Player;
+    public horizontalSpeed: number = 65;
+    public targetSpeed: Phaser.Point = new Phaser.Point(0, 0);
+    public fsm: StateMachine;
+    public healthMeter: Meter;
+    public disableLogic: boolean = true;
+    public hasThrownCutter: boolean = false;
+    public weights: KeyedCollection<number> = new KeyedCollection<number>();
+    public sumOfWeights: number = 0;
+
+    public isRunning: boolean = false;
+    public idleElapsedTime: number = 0;
+    public blinkStartTime: number = 2500;         // After some time player will play idle animation after (ms) passed.
+    public isIdle: boolean = false;               // The player has not moved for some time.
+    public isJumping: boolean = false;
+    public canJumpInAir: boolean = true;
+    public jumpInAirElapsedTime: number = 0;
+    public jumpInAirEndTime: number = 500;
+    public airJumpWindow: boolean = false;
+    public isFalling: boolean = false;
+    public useGravity: boolean = true;
+    public minJumpSpeed: number = 335;
+    public maxJumpSpeed: number = 370;
+    public isOnGround: boolean = false;
+    public jumpHorizontalSpeed: number = 60;
+
+    isHurt: boolean = false;
+    hurtElapsedTime: number = 0;
+    hurtEndTime: number = 500;
+    damageDir: Phaser.Point = new Phaser.Point;
+    isInvincible: boolean = false;
+    invincibleElapsedTime: number = 0;
+    invincibleEndTime: number = 900;
+    isBlinking: boolean = false;
+    blinkingElapsedTime: number = 0;
+    blinkingEndTime: number = 900;
+    blinkRate: number = 2;
+    blinkCounter: number = 0;
+    whiteEffect: Phaser.Sprite;
+    whiteEffectMaxCounter: number = 12;
+    deathEffects: Array<Phaser.Sprite> = new Array<Phaser.Sprite>();
+
+    public leftGroundCheck: Ray;
+    public rightGroundCheck: Ray;
+    public leftCeilCheck: Ray;
+    public rightCeilCheck: Ray;
+    public leftCheck1: Ray;
+    public leftCheck2: Ray;
+    public rightCheck1: Ray;
+    public rightCheck2: Ray;
+    public groundRays: Array<Ray> = new Array<Ray>();
+    public ceilRays: Array<Ray> = new Array<Ray>();
+    public leftRays: Array<Ray> = new Array<Ray>();
+    public rightRays: Array<Ray> = new Array<Ray>();
+    public skinWidth: number = 5;
+    public wallContact: WallContact;
+
+    private bullet: CutManBullet = null;
+    private minJumpHeight: number = 1;
+    private maxJumpHeight: number = 44;
+    private timeToJumpApex = 0.35;
+    private gravityX: number = 0;
+    private gravityY: number = 0;
+    private maxJumpVelocity = 0;
+    private minJumpVelocity = 0;
+
+    constructor(myWorld: World, tag: TagType, e: EntityType, game: Phaser.Game, x: number, y: number, key: string, frame: string) {
+        super(myWorld, tag, e, game, x, y, key, frame);
+
+        this.player = this.myWorld.entityManager.player;
+        this.getPosition().x = x;
+        this.getPosition().y = y;
+        this.anchor.setTo(0.5, 1);
+        this.smoothed = true;
+        this.setFacingDirection(1);
+        this.isShielded = false;
+        this.visible = false;
+
+        this.fsm = new StateMachine();
+        this.fsm.addState(CutManState.idle, new CutManIdleState(this));
+        this.fsm.addState(CutManState.throw_cutter, new CutManThrowCutterState(this));
+        this.fsm.addState(CutManState.jump_to_player, new CutManJumpToPlayerState(this));
+        this.fsm.addState(CutManState.move_to_player, new CutManMoveToPlayerState(this));
+        this.fsm.addState(CutManState.hurt, new CutManHurtState(this));
+        this.fsm.addState(CutManState.taunt, new CutManTauntState(this));
+        this.fsm.changeState(CutManState.idle);
+
+        this.animations.add(CutManAnimations.idle, ['taunt_with_cutter_01'], 10, false, false);
+        this.animations.add(CutManAnimations.throw_cutter, ['throw_01', 'throw_02'], 10, false, false);
+        this.animations.add(CutManAnimations.taunt_with_cutter, ['taunt_with_cutter_01', 'taunt_with_cutter_02'], 10, true, false);
+        this.animations.add(CutManAnimations.taunt_without_cutter, ['taunt_without_cutter_01', 'taunt_without_cutter_02'], 10, true, false);
+        this.animations.add(CutManAnimations.taunt_long, ['taunt_with_cutter_01', 'taunt_with_cutter_02', 'taunt_with_cutter_01', 'taunt_with_cutter_02', 'taunt_with_cutter_01', 'taunt_with_cutter_02', 'taunt_with_cutter_01', 'taunt_with_cutter_02', 'taunt_with_cutter_01', 'taunt_with_cutter_02'], 5, false, false);
+        this.animations.add(CutManAnimations.run_without_cutter, ['run_without_cutter_01', 'run_without_cutter_02', 'run_without_cutter_03', 'run_without_cutter_04'], 10, false, false);
+        this.animations.add(CutManAnimations.run_with_cutter, ['run_with_cutter_01', 'run_with_cutter_02', 'run_with_cutter_03', 'run_with_cutter_04'], 10, false, false);
+        this.animations.add(CutManAnimations.jump_with_cutter, ['jump_with_cutter'], 10, false, false);
+        this.animations.add(CutManAnimations.jump_without_cutter, ['jump_without_cutter'], 10, false, false);
+
+        this.hitbox = new Phaser.Rectangle(this.getPosition().x, this.getPosition().y, 16, 20);
+        this.updateRect();
+
+        this.healthMeter = new Meter(this.game, 40, 15);
+        this.healthMeter.setEnergy(0);
+        this.health = this.healthMeter.totalEnergy;
+        this.maxHealth = this.healthMeter.totalEnergy;
+
+        this.position.x = (this.getPosition().x + 0.5) | 0;
+        this.position.y = this.getPosition().y;
+
+        this.leftGroundCheck = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.rightGroundCheck = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.leftCeilCheck = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.rightCeilCheck = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.leftCheck1 = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.leftCheck2 = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.rightCheck1 = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.rightCheck2 = new Ray(new Vector2(), new Vector2(), RayType.not_infinite);
+        this.groundRays.push(this.leftGroundCheck);
+        this.groundRays.push(this.rightGroundCheck);
+        this.ceilRays.push(this.leftCeilCheck);
+        this.ceilRays.push(this.rightCeilCheck);
+        this.leftRays.push(this.leftCheck1);
+        this.leftRays.push(this.leftCheck2);
+        this.rightRays.push(this.rightCheck1);
+        this.rightRays.push(this.rightCheck2);
+
+        this.wallContact = { left: false, right: false, up: false, down: false };
+        this.calculateRegularJumpSettings();
+
+        this.whiteEffect = this.game.add.sprite(0, 0, Konstants.mega_man, 'white_effect.png');
+        this.whiteEffect.alpha = 0.5;
+        this.whiteEffect.visible = false;
+        this.addChild(this.whiteEffect);
+
+        this.weights.Add(CutManState.throw_cutter, 10);
+        this.weights.Add(CutManState.jump_to_player, 7);
+        this.weights.Add(CutManState.move_to_player, 10);
+        this.weights.Add(CutManState.taunt, 10);
+        this.weights.Keys().forEach(element => {
+            this.sumOfWeights += this.weights.Item(element);
+        });
+    }
+
+    public show(): void {
+        this.visible = true;
+        this.animations.play(CutManAnimations.taunt_long);
+    }
+
+    public manualUpdate(): void {
+        // this.pGraphicsDebug.clear();
+
+        if (!this.alive) {
+            return;
+        }
+
+        if (this.disableLogic) {
+            return;
+        }
+
+        let dirX: number = MathUtil.sign(this.player.getPosition().x - this.getPosition().x);
+        this.setFacingDirection(-MathUtil.sign(dirX));
+
+        this.fsm.currentState.update();
+
+        if (this.useGravity) {
+            this.targetSpeed.x += Math.abs(this.gravityX) * this.game.time.physicsElapsed;
+            this.targetSpeed.y += Math.abs(this.gravityY) * this.game.time.physicsElapsed;
+        }
+
+        this.velocity.x = this.targetSpeed.x;
+        this.velocity.y = this.targetSpeed.y;
+
+        this.getPosition().x += this.velocity.x * this.game.time.physicsElapsed;
+        this.getPosition().y += this.velocity.y * this.game.time.physicsElapsed;
+
+        this.position.x = (this.getPosition().x + 0.5) | 0;
+        this.position.y = this.getPosition().y;
+
+        this.checkBlink();
+        this.checkInvincible();
+        this.checkHurt();
+        this.checkIdle();
+        this.checkFalling();
+        this.updateRect();
+        this.castRays();
+        this.showDebugRays();
+    }
+
+    public checkSurfaceCollisions(surfaces: Array<Surface>): void {
+        this.wallContact.left = false;
+        this.wallContact.right = false;
+        this.wallContact.up = false;
+        this.wallContact.down = false;
+        this.isOnGround = false;
+
+        let into: RayIntersection;
+
+        for (let j = 0; j < surfaces.length; j++) {
+            let surface: Surface = surfaces[j];
+
+            if (!surface.collidable) {
+                continue;
+            }
+
+            let nx: number = surface.dir.y;
+            let ny: number = -surface.dir.x;
+
+            // Check floors
+            if (ny == -1 && this.getVelocity().y > 0) {
+                for (let k = 0; k < this.groundRays.length; k++) {
+                    let ray: Ray = this.groundRays[k];
+
+                    into = SAT2D.testRayVsRay(ray, new Ray(new Vector2(surface.p1.x, surface.p1.y),
+                        new Vector2(surface.p2.x, surface.p2.y), RayType.not_infinite), into);
+
+                    if (into != null) {
+
+                        let dx: number = into.ray1.end.x - into.ray1.start.x;
+                        let dy: number = into.ray1.end.y - into.ray1.start.y;
+                        let distance: number = Math.sqrt(dx * dx + dy * dy);
+                        let trueDistance: number = distance * into.u1;
+
+                        let contactX: number = into.ray1.start.x + into.ray1.dir.x * into.u1;
+                        let contactY: number = into.ray1.start.y + trueDistance;
+
+                        // this.pGraphicsDebug.drawCircle(contactX, contactY, 3);
+
+                        if (trueDistance > this.hitbox.height * 0.5) {
+                            continue;
+                        }
+
+                        this.getPosition().y = contactY;
+                        this.setVelocity(this.getVelocity().x, 0);
+                        this.targetSpeed.y = 0;
+                        this.isOnGround = true;
+                        this.isJumping = false;
+                        this.isFalling = false;
+                        this.airJumpWindow = false;
+                        this.jumpInAirElapsedTime = 0;
+                        this.wallContact.down = true;
+                        continue;
+                    }
+                }
+            }
+
+            // Check ceilings
+            if (ny == 1 && this.getVelocity().y < 0) {
+                for (let k = 0; k < this.ceilRays.length; k++) {
+                    let ray: Ray = this.ceilRays[k];
+
+                    into = SAT2D.testRayVsRay(ray, new Ray(new Vector2(surface.p1.x, surface.p1.y),
+                        new Vector2(surface.p2.x, surface.p2.y), RayType.not_infinite), into);
+
+                    if (into != null) {
+
+                        let dx: number = into.ray1.end.x - into.ray1.start.x;
+                        let dy: number = into.ray1.end.y - into.ray1.start.y;
+                        let distance: number = Math.sqrt(dx * dx + dy * dy);
+                        let trueDistance: number = distance * into.u1;
+
+                        let contactX: number = into.ray1.start.x + into.ray1.dir.x * into.u1;
+                        let contactY: number = into.ray1.start.y - trueDistance;
+
+                        // this.pGraphicsDebug.drawCircle(contactX, contactY, 3);
+
+                        if (trueDistance > this.hitbox.height * 0.5) {
+                            continue;
+                        }
+
+                        this.getPosition().y = contactY + this.hitbox.height;
+                        this.setVelocity(this.getVelocity().x, 0);
+                        this.targetSpeed.y = 0;
+                        this.isFalling = true;
+                        this.wallContact.up = true;
+                        continue;
+                    }
+                }
+            }
+
+            // Check right walls
+            if (nx == -1 && this.getVelocity().x > 0) {
+                for (let k = 0; k < this.rightRays.length; k++) {
+                    let ray: Ray = this.rightRays[k];
+
+                    into = SAT2D.testRayVsRay(ray, new Ray(new Vector2(surface.p1.x, surface.p1.y),
+                        new Vector2(surface.p2.x, surface.p2.y), RayType.not_infinite), into);
+
+                    if (into != null) {
+
+                        let dx: number = into.ray1.end.x - into.ray1.start.x;
+                        let dy: number = into.ray1.end.y - into.ray1.start.y;
+                        let distance: number = Math.sqrt(dx * dx + dy * dy);
+                        let trueDistance: number = distance * into.u1;
+
+                        let contactX: number = into.ray1.start.x + trueDistance;
+                        let contactY: number = into.ray1.start.y;
+
+                        // this.pGraphicsDebug.lineStyle(1, 0);
+                        // this.pGraphicsDebug.beginFill(0xff0000, 0.5);
+                        // this.pGraphicsDebug.drawCircle(contactX, contactY, 5);
+
+                        if (trueDistance > this.hitbox.width * 0.5) {
+                            continue;
+                        }
+
+                        this.getPosition().x = contactX - this.hitbox.width * 0.5;
+                        this.wallContact.right = true;
+                        continue;
+                    }
+                }
+            }
+
+            // Check left walls
+            if (nx == 1 && this.getVelocity().x < 0) {
+                for (let k = 0; k < this.leftRays.length; k++) {
+                    let ray: Ray = this.leftRays[k];
+
+                    into = SAT2D.testRayVsRay(ray, new Ray(new Vector2(surface.p1.x, surface.p1.y),
+                        new Vector2(surface.p2.x, surface.p2.y), RayType.not_infinite), into);
+
+                    if (into != null) {
+
+                        let dx: number = into.ray1.end.x - into.ray1.start.x;
+                        let dy: number = into.ray1.end.y - into.ray1.start.y;
+                        let distance: number = Math.sqrt(dx * dx + dy * dy);
+                        let trueDistance: number = distance * into.u1;
+
+                        let contactX: number = into.ray1.start.x - trueDistance;
+                        let contactY: number = into.ray1.start.y;
+
+                        // this.pGraphicsDebug.lineStyle(1, 0);
+                        // this.pGraphicsDebug.beginFill(0xff0000, 0.5);
+                        // this.pGraphicsDebug.drawCircle(contactX, contactY, 5);
+
+                        if (trueDistance > this.hitbox.width * 0.5) {
+                            continue;
+                        }
+
+                        this.getPosition().x = contactX + this.hitbox.width * 0.5;
+                        this.wallContact.left = true;
+                        continue;
+                    }
+                }
+            }
+        }
+    }
+
+    public shoot(): boolean {
+        this.hasThrownCutter = true;
+        let xPos: number = this.getPosition().x + this.getFacingDirection();
+        let yPos: number = this.getPosition().y - 10;
+
+        this.bullet = new CutManBullet(this, this.player.myWorld, TagType.bullet, EntityType.bullet_cut_man, this.player.game, xPos, yPos, Konstants.rolling_cutter, '');
+        this.bullet.bulletMovement = new BoomerangBulletMovement(
+            this, new Phaser.Point(xPos, yPos), new Phaser.Point(this.player.getPosition().x, this.player.getPosition().y - 10), 120);
+
+        this.bullet.bulletMovement.destroyed.addOnce(() => {
+            this.hasThrownCutter = false;
+            this.bullet.destroyed.dispatch();
+            this.bullet.kill();
+        }, this);
+
+        this.player.game.add.existing(this.bullet);
+        this.player.myWorld.entityManager.addEntity(this.bullet);
+        this.player.game.sound.play(AudioName.rolling_cutter);
+
+        return true;
+    }
+
+    public takeDamage(damage: number, damageDir: Phaser.Point = new Phaser.Point(0, 0)): void {
+        if (this.isShielded) {
+            this.game.sound.play(AudioName.dink);
+            return;
+        }
+
+        if (this.health <= 0) {
+            return;
+        }
+
+        if (this.isInvincible) {
+            return;
+        }
+
+        this.healthMeter.takeEnergy(damage);
+        this.health -= damage;
+        this.targetSpeed.x = 30 * damageDir.x;
+        this.targetSpeed.y = 0;
+
+        if (this.health <= 0) {
+            this.game.sound.play(AudioName.explosion);
+
+            let speed: number = 24;
+            this.addDeathEffect(0, -speed); // top
+            this.addDeathEffect(speed, 0);  // right
+            this.addDeathEffect(0, speed);  // bottom
+            this.addDeathEffect(-speed, 0); // left
+
+            speed = 40;
+            this.addDeathEffect(0, -speed); // top
+            this.addDeathEffect(Math.cos(45 * (Math.PI / 180)) * speed, Math.sin(-45 * (Math.PI / 180)) * speed); // top-right
+            this.addDeathEffect(speed, 0);  // right
+            this.addDeathEffect(Math.cos(45 * (Math.PI / 180)) * speed, Math.sin(45 * (Math.PI / 180)) * speed); // bottom-right
+            this.addDeathEffect(0, speed);  // bottom
+            this.addDeathEffect(Math.cos(135 * (Math.PI / 180)) * speed, Math.sin(45 * (Math.PI / 180)) * speed); // bottom-left
+            this.addDeathEffect(-speed, 0);  // left
+            this.addDeathEffect(Math.cos(135 * (Math.PI / 180)) * speed, Math.sin(-45 * (Math.PI / 180)) * speed); // top-left
+
+            this.health = 0;
+            this.myWorld.dropManager.dropBossItem(EntityType.cut_man_boss_item, 201.5 * 16, 78 * 16);
+            this.myWorld.createExplosionEffect(this.getPosition().x, this.getPosition().y - (<Phaser.Rectangle>this.hitbox).halfHeight);
+            this.destroyed.dispatch(this);
+            this.kill();
+        }
+        else {
+            this.game.sound.play(AudioName.enemy_damage);
+            this.isHurt = true;
+            this.isInvincible = true;
+            this.isBlinking = true;
+            this.myWorld.createHurtDust(this.getPosition().x - 2, this.getPosition().y - 40);
+            this.myWorld.createHurtDust(this.getPosition().x - 12, this.getPosition().y - 36);
+            this.myWorld.createHurtDust(this.getPosition().x + 8, this.getPosition().y - 36);
+            this.whiteEffect.visible = true;
+            this.whiteEffect.position.x = -12;
+            this.whiteEffect.position.y = -24;
+            this.fsm.changeState(CutManState.hurt);
+        }
+    }
+
+    public jump(): void {
+        if (this.isHurt) {
+            return;
+        }
+
+        if (this.isOnGround) {
+            this.jumpOnGround();
+        }
+    }
+
+    private jumpOnGround(): void {
+        this.targetSpeed.y = -this.maxJumpVelocity;
+        this.isOnGround = false;
+        this.isJumping = true;
+        this.isFalling = false;
+    }
+
+    private calculateRegularJumpSettings(): void {
+        this.gravityY = -(2 * this.maxJumpHeight) / Math.pow(this.timeToJumpApex, 2);
+        this.maxJumpVelocity = Math.abs(this.gravityY) * this.timeToJumpApex;
+        this.minJumpVelocity = Math.sqrt(2 * Math.abs(this.gravityY) * this.minJumpHeight);
+
+        // console.log('gravity: ' + this._gravity);
+        // console.log('maxJumpVelocity: ' + this._maxJumpVelocity);
+        // console.log('minJumpVelocity: ' + this._minJumpVelocity);
+    }
+
+    private addDeathEffect(vx: number, vy: number): void {
+        let s: Phaser.Sprite = this.myWorld.createMegaManDeathEffect(this.getPosition().x, this.getPosition().y - 12);
+        s.body.velocity.x = vx;
+        s.body.velocity.y = vy;
+        this.deathEffects.push(s);
+    }
+
+    private checkBlink(): void {
+        if (!this.isBlinking) {
+            return;
+        }
+
+        this.blinkCounter++;
+
+        if (this.blinkCounter % this.blinkRate == 0) {
+            this.alpha == 1 ? this.alpha = 0 : this.alpha = 1;
+        }
+
+        if (this.blinkCounter > this.whiteEffectMaxCounter) {
+            this.whiteEffect.visible = false;
+        }
+
+        this.blinkingElapsedTime += this.game.time.elapsedMS;
+
+        if (this.blinkingElapsedTime > this.blinkingEndTime) {
+            this.blinkingElapsedTime = 0;
+            this.isBlinking = false;
+            this.alpha = 1;
+            this.blinkCounter = 0;
+        }
+    }
+
+    private checkInvincible(): void {
+        if (!this.isInvincible) {
+            return;
+        }
+
+        this.invincibleElapsedTime += this.game.time.elapsedMS;
+
+        if (this.invincibleElapsedTime > this.invincibleEndTime) {
+            this.invincibleElapsedTime = 0;
+            this.isInvincible = false;
+        }
+    }
+
+    private checkHurt(): void {
+        if (!this.isHurt) {
+            return;
+        }
+
+        this.hurtElapsedTime += this.game.time.elapsedMS;
+
+        if (this.hurtElapsedTime > this.hurtEndTime) {
+            this.hurtElapsedTime = 0;
+            this.isHurt = false;
+        }
+    }
+
+    private checkIdle(): void {
+        if (this.isOnGround && this.velocity.x == 0) {
+            this.idleElapsedTime += this.game.time.elapsedMS;
+
+            if (this.idleElapsedTime > this.blinkStartTime) {
+                this.isIdle = true;
+            }
+        }
+        else {
+            this.isIdle = false;
+            this.idleElapsedTime = 0;
+        }
+    }
+
+    private checkFalling(): void {
+        if (!this.isOnGround && this.velocity.y > 0) {
+            this.isFalling = true;
+
+            // When falling we give the player some time to jump again; after that time jumping isnt possible while in air.
+            this.airJumpWindow = true;
+            this.jumpInAirElapsedTime += this.game.time.elapsedMS;
+
+            if (this.jumpInAirElapsedTime > this.jumpInAirEndTime) {
+                this.airJumpWindow = false;
+            }
+        }
+    }
+
+    /**
+     * Using the current position moves the rays a frame even though the player may be running into a wall. By using
+     * previous position the rays don't move for that frame. They use the previous frame. Think about it, when the player
+     * is running into a wall, its 'bounds' should not move.
+     */
+    private castRays(): void {
+        let centerX: number = this.getPosition().x;
+        let centerY: number = this.getPosition().y - this.hitbox.height * 0.5;
+
+        if (this.wallContact.left || this.wallContact.right) {
+            centerX = this.previousPosition.x;
+        }
+
+        // cast ground rays
+        this.leftGroundCheck.start = new Vector2(centerX - this.hitbox.width * 0.5 + 3, centerY);
+        this.leftGroundCheck.end = new Vector2(centerX - this.hitbox.width * 0.5 + 3, centerY + this.hitbox.height * 0.5 + this.skinWidth);
+        this.rightGroundCheck.start = new Vector2(centerX + this.hitbox.width * 0.5 - 3, centerY);
+        this.rightGroundCheck.end = new Vector2(centerX + this.hitbox.width * 0.5 - 3, centerY + this.hitbox.height * 0.5 + this.skinWidth);
+
+        // cast ceil rays
+        this.leftCeilCheck.start = new Vector2(centerX - this.hitbox.width * 0.5 + 3, centerY);
+        this.leftCeilCheck.end = new Vector2(centerX - this.hitbox.width * 0.5 + 3, centerY - this.hitbox.height * 0.5 - this.skinWidth);
+        this.rightCeilCheck.start = new Vector2(centerX + this.hitbox.width * 0.5 - 3, centerY);
+        this.rightCeilCheck.end = new Vector2(centerX + this.hitbox.width * 0.5 - 3, centerY - this.hitbox.height * 0.5 - this.skinWidth);
+
+        // cast left rays
+        let offsetY: number = 8;
+        this.leftCheck1.start = new Vector2(centerX, centerY - offsetY);
+        this.leftCheck1.end = new Vector2(centerX - this.hitbox.width * 0.5 - this.skinWidth, centerY - offsetY);
+        this.leftCheck2.start = new Vector2(centerX, centerY + offsetY);
+        this.leftCheck2.end = new Vector2(centerX - this.hitbox.width * 0.5 - this.skinWidth, centerY + offsetY);
+
+        // cast right rays
+        offsetY = 8;
+        this.rightCheck1.start = new Vector2(centerX, centerY - offsetY);
+        this.rightCheck1.end = new Vector2(centerX + this.hitbox.width * 0.5 + this.skinWidth, centerY - offsetY);
+        this.rightCheck2.start = new Vector2(centerX, centerY + offsetY);
+        this.rightCheck2.end = new Vector2(centerX + this.hitbox.width * 0.5 + this.skinWidth, centerY + offsetY);
+    }
+
+    private showDebugRays(): void {
+        // this.pGraphicsDebug.lineStyle(1, 0);
+
+        // this.groundRays.forEach((ray) => {
+        //     this.pGraphicsDebug.moveTo(ray.start.x, ray.start.y);
+        //     this.pGraphicsDebug.lineTo(ray.end.x, ray.end.y);
+        // });
+
+        // this.ceilRays.forEach((ray) => {
+        //     this.pGraphicsDebug.moveTo(ray.start.x, ray.start.y);
+        //     this.pGraphicsDebug.lineTo(ray.end.x, ray.end.y);
+        // });
+
+        // this.leftRays.forEach((ray) => {
+        //     this.pGraphicsDebug.moveTo(ray.start.x, ray.start.y);
+        //     this.pGraphicsDebug.lineTo(ray.end.x, ray.end.y);
+        // });
+
+        // this.rightRays.forEach((ray) => {
+        //     this.pGraphicsDebug.moveTo(ray.start.x, ray.start.y);
+        //     this.pGraphicsDebug.lineTo(ray.end.x, ray.end.y);
+        // });
+    }
+}
+
+enum CutManState {
+    idle = 'idle',
+    throw_cutter = 'active',
+    jump_to_player = 'jump_to_player',
+    move_to_player = 'move_to_player',
+    hurt = 'hurt',
+    taunt = 'taunt',
+}
+
+class CutManIdleState implements State {
+
+    name: string = CutManState.idle;
+    initialized: boolean;
+    actor: CutMan;
+    elapsedTime: number = 0;
+    endTime: number = 3000;
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManIdleState');
+        this.initialized = true;
+        this.actor.animations.play(CutManAnimations.idle);
+    }
+
+    update(): void {
+        let choice: string = MathUtil.weightedRandomKey(this.actor.weights, this.actor.sumOfWeights);
+
+        switch (choice) {
+            case CutManState.throw_cutter:
+                if (this.actor.hasThrownCutter) {
+                    break;
+                }
+                this.actor.fsm.changeState(CutManState.throw_cutter);
+                return;
+
+            case CutManState.jump_to_player:
+                this.actor.fsm.changeState(CutManState.jump_to_player);
+                break;
+
+            case CutManState.move_to_player:
+                this.actor.fsm.changeState(CutManState.move_to_player);
+                break;
+
+            case CutManState.taunt:
+                if (this.actor.isOnGround) {
+                    this.actor.fsm.changeState(CutManState.taunt);
+                }
+                break;
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+        this.elapsedTime = 0;
+    }
+}
+
+class CutManThrowCutterState implements State {
+
+    name: string = CutManState.throw_cutter;
+    initialized: boolean;
+    actor: CutMan;
+    elapsedTime: number = 0;
+    endTime: number = 1000;
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManThrowCutterState');
+        this.initialized = true;
+        if (this.actor.isOnGround) {
+            this.actor.targetSpeed.x = 0;
+        }
+        this.actor.animations.play(CutManAnimations.throw_cutter);
+    }
+
+    update(): void {
+        if (this.actor.animations.currentAnim.isFinished) {
+            this.actor.shoot();
+            this.actor.fsm.changeState(CutManState.idle);
+            return;
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+        this.elapsedTime = 0;
+    }
+}
+
+class CutManJumpToPlayerState implements State {
+
+    name: string = CutManState.jump_to_player;
+    initialized: boolean;
+    actor: CutMan;
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManJumpToPlayerState');
+        this.initialized = true;
+        let jumpSpeed: number = (Math.random() * (this.actor.maxJumpSpeed - this.actor.minJumpSpeed)) + this.actor.minJumpSpeed;
+        let dirX: number = MathUtil.sign(this.actor.player.getPosition().x - this.actor.getPosition().x);
+        this.actor.targetSpeed.y = -jumpSpeed;
+        this.actor.targetSpeed.x = this.actor.jumpHorizontalSpeed * dirX;
+
+        if (this.actor.hasThrownCutter) {
+            this.actor.animations.play(CutManAnimations.jump_without_cutter);
+        }
+        else {
+            this.actor.animations.play(CutManAnimations.jump_with_cutter);
+        }
+    }
+
+    update(): void {
+        if (this.actor.isOnGround) {
+            this.actor.fsm.changeState(CutManState.idle);
+            return;
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+    }
+}
+
+class CutManMoveToPlayerState implements State {
+
+    name: string = CutManState.move_to_player;
+    initialized: boolean;
+    actor: CutMan;
+    private dirToPlayer: Phaser.Point = new Phaser.Point();
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManMoveToPlayerState');
+        this.initialized = true;
+    }
+
+    update(): void {
+        if (this.actor.hasThrownCutter) {
+            this.actor.animations.play(CutManAnimations.run_without_cutter);
+        }
+        else {
+            this.actor.animations.play(CutManAnimations.run_with_cutter);
+        }
+
+        if (this.actor.wallContact.left) {
+            this.actor.fsm.changeState(CutManState.jump_to_player);
+            return;
+        }
+
+        this.dirToPlayer = Helper.directionTo2(this.actor.getPosition(), this.actor.player.getPosition());
+        this.actor.targetSpeed.x = MathUtil.sign(this.dirToPlayer.x) * this.actor.horizontalSpeed;
+        let distance: number = Helper.distanceTo2(this.actor.getPosition(), this.actor.player.getPosition());
+
+        if (distance < 5) {
+            this.actor.fsm.changeState(CutManState.idle);
+            return;
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+    }
+}
+
+class CutManHurtState implements State {
+
+    name: string = CutManState.hurt;
+    initialized: boolean;
+    actor: CutMan;
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManHurtState');
+        this.initialized = true;
+
+        if (this.actor.hasThrownCutter) {
+            this.actor.animations.play(CutManAnimations.hurt_without_cutter);
+        }
+        else {
+            this.actor.animations.play(CutManAnimations.hurt_with_cutter);
+        }
+    }
+
+    update(): void {
+
+        if (!this.actor.isHurt) {
+            this.actor.targetSpeed.x = 0;
+            this.actor.targetSpeed.y = 0;
+            this.actor.fsm.changeState(CutManState.idle);
+            return;
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+    }
+}
+
+class CutManTauntState implements State {
+
+    name: string = CutManState.taunt;
+    initialized: boolean;
+    actor: CutMan;
+
+    constructor(actor: CutMan) {
+        this.actor = actor;
+    }
+
+    enter(): void {
+        // console.log('CutManTauntState');
+        this.initialized = true;
+
+        if (this.actor.hasThrownCutter) {
+            this.actor.animations.play(CutManAnimations.taunt_without_cutter);
+        }
+        else {
+            this.actor.animations.play(CutManAnimations.taunt_with_cutter);
+        }
+
+        this.actor.targetSpeed.x = 0;
+
+        if (Math.random() > 0.75) {
+            this.actor.game.sound.play(AudioName.beam);
+        }
+    }
+
+    update(): void {
+        if (this.actor.animations.currentAnim.loopCount == 3) {
+            if (this.actor.hasThrownCutter) {
+                this.actor.fsm.changeState(CutManState.idle);
+            }
+            else {
+                this.actor.fsm.changeState(CutManState.throw_cutter);
+            }
+        }
+    }
+
+    exit(): void {
+        this.initialized = false;
+        this.actor.animations.stop();
+    }
+}

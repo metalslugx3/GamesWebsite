@@ -1,0 +1,36 @@
+{"frames": {
+
+"watcher_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":42},
+	"sourceSize": {"w":16,"h":42}
+},
+"watcher_02":
+{
+	"frame": {"x":24,"y":5,"w":16,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":42},
+	"sourceSize": {"w":16,"h":42}
+},
+"watcher_03":
+{
+	"frame": {"x":43,"y":5,"w":16,"h":42},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":42},
+	"sourceSize": {"w":16,"h":42}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "watcher.png",
+	"format": "RGBA8888",
+	"size": {"w":64,"h":52},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:c689ff6f8070274d235fe6575f668276:e9fd9ccccc4e5418083edd349c8fea3c:6014a64b516c5947b6d6e93f967f3d30$"
+}
+}

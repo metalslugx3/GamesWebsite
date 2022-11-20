@@ -1,0 +1,52 @@
+{"frames": {
+
+"vanishing_block_01":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":22},
+	"sourceSize": {"w":16,"h":22}
+},
+"vanishing_block_02":
+{
+	"frame": {"x":24,"y":5,"w":16,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":22},
+	"sourceSize": {"w":16,"h":22}
+},
+"vanishing_block_03":
+{
+	"frame": {"x":43,"y":5,"w":16,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":22},
+	"sourceSize": {"w":16,"h":22}
+},
+"vanishing_block_04":
+{
+	"frame": {"x":62,"y":5,"w":16,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":22},
+	"sourceSize": {"w":16,"h":22}
+},
+"vanishing_block_05":
+{
+	"frame": {"x":81,"y":5,"w":16,"h":22},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":22},
+	"sourceSize": {"w":16,"h":22}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "vanishing_block.png",
+	"format": "RGBA8888",
+	"size": {"w":102,"h":32},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5cccc8928c0db0e2c60358d0413212af:e5d24e3f5039f5e2a46d868b5b27e62e:1cc221e33caa39fcf20a42c038c0deed$"
+}
+}

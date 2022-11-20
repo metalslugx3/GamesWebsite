@@ -1,0 +1,20 @@
+{"frames": {
+
+"killer_bullet":
+{
+	"frame": {"x":5,"y":5,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "killer_bullet.png",
+	"format": "RGBA8888",
+	"size": {"w":26,"h":26},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9caac67cead7a706fc6e686c5f17df58:fece93118efd788af8de116041ade104:05a3f31e227957a47aead197de905b40$"
+}
+}

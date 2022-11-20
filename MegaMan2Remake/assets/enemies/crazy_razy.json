@@ -1,0 +1,84 @@
+{"frames": {
+
+"crazy_razy_fly":
+{
+	"frame": {"x":5,"y":5,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_fly_attack_01":
+{
+	"frame": {"x":40,"y":5,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_fly_attack_02":
+{
+	"frame": {"x":75,"y":5,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_legs_01":
+{
+	"frame": {"x":5,"y":39,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_legs_02":
+{
+	"frame": {"x":40,"y":39,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_legs_03":
+{
+	"frame": {"x":75,"y":39,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_walk_01":
+{
+	"frame": {"x":5,"y":73,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_walk_02":
+{
+	"frame": {"x":40,"y":73,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+},
+"crazy_razy_walk_03":
+{
+	"frame": {"x":75,"y":73,"w":32,"h":31},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":31},
+	"sourceSize": {"w":32,"h":31}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "crazy_razy.png",
+	"format": "RGBA8888",
+	"size": {"w":112,"h":109},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:fd986e8bc618e9db37b75450698b0b92:a2b299502391a5eb03b6b04131a90905:ecae03af2c80daa08bd309ac2d9c8811$"
+}
+}

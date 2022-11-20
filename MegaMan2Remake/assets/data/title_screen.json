@@ -1,0 +1,34 @@
+{
+    "title_screen":
+    {
+		"title":
+		{
+			"position":[128,80]
+		},
+		
+		"press_start":
+		{
+			"position":[128,140]
+		},
+		
+		"tm":
+		{
+			"position":[208,112]
+		},
+		
+		"eula1":
+		{
+			"position":[7,170]
+		},
+		
+		"eula2":
+		{
+			"position":[7,190]
+		},
+		
+		"eula3":
+		{
+			"position":[7,210]
+		}
+	}
+}
