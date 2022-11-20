@@ -26,6 +26,10 @@ table {
 	table-layout: fixed;
 }
 
+a{
+	color: whitesmoke;
+}
+
 #debugOverlay
 {
 	position: absolute;
@@ -59,4 +63,12 @@ table {
 	margin: auto;
 	color: #F6F5F0;
 	font-size: 1.13em;
+}
+
+#gameTitle{
+	background-color: #13151c;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 16px;
+	text-align: center;
+	color: red;
 }
