@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>mario bros nes emulator</title>
+
+  <style type="text/css">
+    /* canvas {
+      display: block;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    } */
+
+    @font-face {
+      font-family: "Connection";
+      src: url("./assets/font/Connection.ttf") format("truetype")
+    }
+
+    body,
+    p {
+      font-size: 16px;
+      color: black;
+      background-color: dimgray;
+    }
+
+    body #title {
+      text-align: center
+    }
+
+    body #title h1 {
+      font-family: "Connection", cursive;
+      padding: 0;
+      font-size: 30px;
+    }
+
+    /* body #canvas {
+      width: 640px;
+      height: 480px;
+    } */
+
+    #controls {
+      font-family: "Connection", cursive;
+      text-align: center;
+      /* padding: 0;
+      font-size: 30px; */
+    }
+
+    /* body div.container div#game {
+      display: block;
+      margin-left: auto;
+      margin-right: auto
+    } */
+
+    /* div.test {
+
+    } */
+  </style>
+
+  <script src="build/bundle.js"></script>
+
+</head>
+
+<body>
+  <div id="title">
+    <h1>mario bros nes emulator</h1>
+  </div>
+
+  <div id="canvas"></div>
+
+  <div id="controls">
+    <p>Controls</p>
+    <p>A: Move Left</p>
+    <p>D: Move Right</p>
+    <p>Space: JUMP</p>
+    <p>Hold F to run</p>
+    <p>Period: Next Level</p>
+    <p>Comma: Prev Level</p>
+    <p>P: Pause</p>
+    <p>R: Reset Level</p>
+  </div>
+
+  <!-- <div class="test">
+  </div> -->
+</body>
+
+</html>

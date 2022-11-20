@@ -1,0 +1,76 @@
+-Parse Platforms layer for each platformType
+--create an object type for each platform type
+--standard, sink, pulley, follow_path
+--pulley's always come in two; just save the pulleys in an array then parse that array to find
+	the pulley ID's that match
+--follow_path platforms require another layer that holds the waypoints; waypoints have to share
+	the same ID as its corresponding follow_path platform
+
+	
+Platform Types
+
+-standard
+--speed:number
+--tileDistance:integer -> how far to travel, in tiles
+--direction:string
+---horizontal, vertical
+--moveType:string
+---yoyo, loop, once
+--waitToMove:boolean -> waits until Mario steps on it, before moving
+--skin:string
+---ow
+
+
+-sink
+--speed:number
+--tileDistance:integer -> how far to travel, in tiles
+--returnToStart:boolean
+--breaksOff:boolean
+--skin:string
+---ow
+--doesn't move
+--player stands on it and it slowly goes down
+--optional: platform rises back to start Y when no player on it
+
+
+-pulley
+--id:string -> pulleys must have complimentary ID's
+--speed:number
+--balanceSpeed:number -> how long it takes to go back to equilibrium
+--tileDistance:integer -> how far to travel, in tiles
+--skin:string
+--requires two platforms
+--both platforms share the same ID
+--the platform being stood on is lowered, the other platform is raised
+--if the platforms reaches too low it will break off
+
+
+-follow_path
+--speed:number
+--moveType:string
+---yoyo, loop, once
+--waitToMove:boolean -> waits until mario steps on it, before moving
+--skin:string
+---ow
+--platform follows a path
+--requires separate waypoints with the same ID as platform
+
+
+-donut
+--fallTimer:number
+--isRespawnable:boolean
+--respawnTimer:number
+--This will be an actual tile (not an object)
+--the fall timer begins when player stands on platform; after timer reaches 0 the platform falls
+--the fall timer resets when player is no longer detected on the platform
+
+
+
+Platform Spawner
+--spawns standard platforms at some interval
+--number of platforms to prespawn
+--start delay of to enable platform
+--platform speed
+--tile distance for platforms
+--platform width/height
+--platform skin

@@ -1,0 +1,8 @@
+{
+  "firstLevel": "Level_5_3",
+  "player":
+  {
+    "canBeHurt": false,
+    "canBeKilled": false
+  }
+}
