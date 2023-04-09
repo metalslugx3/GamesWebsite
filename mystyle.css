@@ -1,7 +1,7 @@
 html, body { height:100%; overflow:hidden; background-color:#191B25;}
 body { margin:0; }
-h1 { color:#F6F5F0; text-align: center;}
-h2 { color:#F6F5F0; text-align: center;}
+h1 { color:#3387e6; text-align: center;}
+h2 { color:#008300; text-align: center;}
 ol, ul, li
 {
 	list-style-position:initial;
@@ -12,7 +12,8 @@ ol, ul, li
 	font-size: 1.13em;
 }
 
-textarea{
+textarea
+{
 	background-color: #13151c;
 	color: #F6F5F0;
 	font-size: 1.2em;
@@ -20,13 +21,15 @@ textarea{
 	width:100%;
 }
 
-table {
+table 
+{
 	text-align: center;
 	margin:auto;
 	table-layout: fixed;
 }
 
-a{
+a
+{
 	color: whitesmoke;
 }
 
@@ -58,17 +61,18 @@ a{
 	margin-bottom: 315px;
 }
 
-#tableTitle{
+#tableTitle
+{
 	background-color: #000000;
 	margin: auto;
 	color: #F6F5F0;
 	font-size: 1.13em;
 }
 
-#gameTitle{
+#gameTitle
+{
 	background-color: #13151c;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	font-size: 16px;
+	font-size: 24px;
 	text-align: center;
-	color: red;
 }
