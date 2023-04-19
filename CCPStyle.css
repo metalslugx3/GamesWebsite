@@ -1,0 +1,142 @@
+
+html 
+{  
+  background: #dbdbdb;
+  color: #111111;
+  /* font-family: "lucida sans", serif;  */
+
+}
+
+body
+{
+  margin: 0;
+}
+
+
+/* h1 , h2 , h3 , h4 , h5
+{
+  text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+} */
+
+a
+{
+  text-decoration: none;
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
+  color: rgb(38, 0, 109);
+}
+
+a:hover
+{
+  color: rgb(61, 0, 173);
+  transition: all 250ms linear;
+}
+
+
+ul
+{
+  list-style-type: square;
+}
+
+.navigationBar ul{
+  /* list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #f1f1f1; */
+
+  list-style-type: none;
+  margin: 0px;
+  border-width: 0ex;
+  padding: 0px;
+  width: 10em;
+  background-color: #0f0f0f;
+  height: 100%; /* Full height */
+  position: fixed;
+  overflow: auto;
+
+  
+}
+
+.navigationBar li a {
+  display: block;
+  color: rgb(196, 196, 196);
+  padding: 8px 16px;
+  text-decoration: none;
+  text-align: center;
+  
+}
+
+
+.navigationBar li a:hover {
+  
+  background-color: rgba(255, 255, 255 , 0.05);
+  color: white;
+}
+
+.navigationBar li  a.active {
+  background-color: rgb(112, 0, 204);
+  color: white;
+  text-shadow: 4px 4px 5px rgba(40, 40, 40, 0.5);
+}
+
+.navigationBody
+{  
+  margin-left:10em;
+  padding: 5px 200px 10px 25px;
+}
+
+.contentBox
+{       
+    background-color: #a9a6aa;
+    background-image: linear-gradient( to right , #c4c4c4, #d4d4d4);
+    border-radius: 10px;
+    border-style: outset;
+    border-width: thin;
+    border-color: rgba(0, 0, 0, 0.4);
+    padding: 5px 5px 5px 15px;
+    margin: 10px 10px 10px 0px;
+    /* box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4); */
+}
+
+.contentBox p , .tip p
+{       
+  text-align: left;  
+}
+
+.tip
+{       
+  background-color: #a9a6aa;
+  background-image: linear-gradient( to right , #c4c4c4, #d4d4d4);
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: thin;
+  border-color: rgba(0, 0, 0, 0.4);
+  padding: 5px 5px 5px 5px;
+  margin: 10px 10px 10px 0px;
+}
+
+/* .collapsible
+{
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+} */
+
+
+
+/* .content 
+{
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+} */
+
+
+

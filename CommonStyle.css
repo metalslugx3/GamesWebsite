@@ -1,0 +1,57 @@
+.foldout-content
+{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.release
+{     
+  padding: 18px;
+  width: 100%;
+  border: unset;
+  text-align: left;
+  /* outline: none; */
+  font-size: 16px;
+}
+
+.release-show-content
+{
+    border: solid;
+}
+
+#safe
+{
+  background-color: rgb(22, 185, 0);
+  color: rgb(22, 22, 22);
+}
+
+#safe:hover
+{
+  border-color: rgb(0, 0, 0);
+  border: solid;
+}
+
+#risk
+{
+  background-color: rgb(255, 166, 0);
+  color: rgb(22, 22, 22);
+}
+
+#risk:hover
+{  
+    border-color: rgb(0, 0, 0);
+    border: solid;
+}
+
+#danger
+{
+  background-color: rgb(255, 0, 0);
+  color: rgb(235, 235, 235);
+}
+
+#danger:hover
+{  
+    border-color: rgb(0, 0, 0);
+    border: solid;
+}
